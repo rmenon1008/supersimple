@@ -1,0 +1,56 @@
+<?php
+
+/**
+ *
+ * @package Rohan_Menon
+ */
+
+
+get_header();
+?>
+
+<div id="path">
+    <h1 id="pathString">/</h1>
+    <div id="haze"></div>
+</div>
+<h1 id="title" class="glide-in">
+    <span class="text-wrapper">
+        <span class="letters"><?php single_tag_title() ?></span>
+    </span>
+</h1>
+<script>
+    var path = (window.location.pathname).split("-").join(" ").split("/");
+    document.getElementById("pathString").innerHTML = (path.slice(0, path.length - 2).join("/") + "/");
+
+    var textWrapper = document.querySelector('.glide-in .letters');
+    textWrapper.innerHTML = textWrapper.textContent.replace(/\S+/g, "<span class='word'>$&</span>");
+    var words = document.querySelectorAll('.glide-in .word')
+    for (i = 0; i < words.length; ++i) {
+        words[i].innerHTML = words[i].textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+    }
+    anime.timeline()
+        .add({
+            targets: '.glide-in .letter',
+            translateY: ["1.1em", 0],
+            translateX: ["-0.7em", 0],
+            translateZ: 0,
+            rotateZ: [80, 0],
+            duration: 750,
+            easing: "easeOutExpo",
+            delay: (el, i) => 18 * i
+        }).add({
+            targets: '.ml7',
+            opacity: 0,
+            duration: 1000,
+            easing: "easeOutExpo",
+            delay: 1000
+        });
+</script>
+
+<?php
+
+
+echo do_shortcode('[post_grid tag="' . single_tag_title('', false) . '"]');
+
+get_footer();
+
