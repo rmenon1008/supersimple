@@ -16,9 +16,6 @@ $title_string = get_the_title();
 
 ?>
 
-<style>
-</style>
-
 <h1 id="title" class="glide-in">
     <span class="text-wrapper">
         <span class="letters"><?php echo $title_string; ?></span>
@@ -71,4 +68,54 @@ $title_string = get_the_title();
             easing: "easeOutExpo",
             delay: 1000
         });
+
+    var title = document.getElementById("title");
+    var pathElem = document.getElementById("path");
+    var haze = document.getElementById("haze");
+    var hazeWidth = 0;
+    var pos = 0;
+    var prevLink = pathElem.textContent.split("/").at(-2);
+
+    var fakeText = document.createElement("h1");
+    fakeText.className = 'invisible';
+    var fakeString = document.createTextNode(prevLink);
+    fakeText.appendChild(fakeString);
+
+    document.body.appendChild(fakeText);
+
+    var maxSwipe = document.querySelector('.invisible').clientWidth + 30;
+    var moved = 0;
+
+    title.addEventListener("touchstart", function(e) {
+        title.style.transition = ""
+        pathElem.style.transition = ""
+        pos = e.touches[0].clientX;
+        console.log("start");
+        hazeWidth = haze.clientWidth;
+    })
+    title.addEventListener("touchmove", function(e) {
+        moved = e.touches[0].clientX - pos;
+        if (moved > maxSwipe) {
+            moved = maxSwipe;
+        }
+        if (moved < 0) {
+            moved = 0;
+        }
+        title.style.transform = "translate(" + moved + "px)";
+        pathElem.style.transform = "translate(" + moved + "px)";
+        haze.style.transform = "translate(" + -moved + "px)";
+    })
+    title.addEventListener("touchend", function(e) {
+        pos = 0;
+        console.log(document.width)
+        if (moved > maxSwipe - 10 || moved > window.innerWidth*0.7) {
+            window.location.href = sliced + "/"
+        } else {
+            title.style.transition = "0.3s ease-out";
+            pathElem.style.transition = "0.3s ease-out";
+            title.style.transform = "translate(0)";
+            pathElem.style.transform = "translate(0)";
+            haze.style.transform = "translate(0)";
+        }
+    })
 </script>

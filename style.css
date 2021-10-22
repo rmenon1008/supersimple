@@ -268,6 +268,10 @@ h1 {
   /* letter-spacing: -0.02em; */
 }
 
+h1.invisible {
+  visibility:hidden;
+}
+
 h2 {
   font-family: Space, Helvetica, sans-serif, bold;
   font-size: 40px;
@@ -474,6 +478,16 @@ img {
   max-width: 650px;
 }
 
+.detail .narrow {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 650px !important;
+}
+
+.detail .wp-block-code {
+  max-height: 600px;
+}
+
 .detail figure {
   margin: 0;
 }
@@ -670,6 +684,8 @@ h1 {
   min-width: 30px;
   cursor: pointer;
 
+  transition: translate 0.1s;
+
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -834,7 +850,8 @@ gray {
 .post_list.archive .scroll-window {
   max-height: none;
   overflow: auto;
-  margin-left: -15px;
+  margin: 0;
+  padding: 0;
 }
 
 .post_list h2 {
@@ -855,6 +872,11 @@ gray {
   animation-delay: calc(var(--animation-order) * 50ms);
   animation-fill-mode: both;
   animation-timing-function: ease-in-out;
+}
+
+.post_list.archive .image-gallery-small {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .image-gallery-small-haze {
@@ -991,6 +1013,18 @@ gray {
     height: 200px !important;
     padding-left:0;
     padding-top: 10px;
+  }
+
+  .image-gallery-small:hover .gallery-text h3::before {
+    opacity: 0;
+  }
+  
+  .image-gallery-small:hover .gallery-text {
+    transform: translate(0);
+  }
+  
+  .image-gallery-small:hover .gallery-text p {
+    transform: translate(0);
   }
 
   gray {
@@ -1175,7 +1209,17 @@ gray {
   }
 
   #path {
-    display: none;
+    margin-top: 8px;
+    vertical-align: top;
+  }
+
+  #haze {
+    width: 25px !important;
+    height: 5rem !important;
+  }
+
+  .word:not(:first-of-type) {
+    margin-top: -100px;
   }
 
   header nav ul li a {
@@ -1188,15 +1232,21 @@ gray {
 
   #title {
     padding-top: 8px;
-    overflow-x: scroll;
-    overflow-y: hidden;
   }
 
-  #title::-webkit-scrollbar {
+
+  #title {
+    /* margin-left: 100px;
+    margin-right: 100px; */
+    width: 100%;
+    transform: translate(0px);
+  }
+
+  #title-window::-webkit-scrollbar {
     display: none;
   }
 
-  #title {
+  #title-window {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
@@ -1234,7 +1284,6 @@ gray {
 .footer-content {
   /* display: none; */
   margin: auto;
-  color: #aaaaaa;
   font-weight: 200;
 }
 
@@ -1250,12 +1299,23 @@ gray {
 
 .footer-table h3{
   margin-top: 0;
+  color: #949494 !important;
 }
 
 .footer-table td {
+  color: #767676 !important;
   padding: 20px;
   /* margin: 20px; */
   /* box-sizing: border-box; */
+}
+
+body.dark .footer-table h3{
+  color: #6d6d6d !important;
+}
+
+body.dark .footer-table td,
+body.dark .footer-table a {
+  color: #898989 !important;
 }
 
 .footer-table .td1{
@@ -1295,6 +1355,10 @@ gray {
   text-decoration: none;
 }
 
+body.dark a.back-to-top {
+  color: white !important;
+}
+
 .back-to-top::after {
   display: inline-block;
   content: "↑";
@@ -1332,9 +1396,9 @@ gray {
 
 .wp-block-video progress {
   display: block;
-  margin-top: -5px;
+  margin-top: -7px;
   margin-bottom: 40px;
-  height: 5px;
+  height: 7px;
   border: none;
   width: 100%;
 }
@@ -1349,24 +1413,76 @@ gray {
   transition-timing-function: linear;
 }
 
+body.dark .wp-block-video progress[value]::-webkit-progress-bar {
+  background-color: #777;
+}
+
+body.dark .wp-block-video progress[value]::-webkit-progress-value {
+  background-color: #444;
+}
+
+.short-logo {
+  background-color: #f5f5f5 !important;
+  position: relative;
+  margin-bottom: 50px !important;
+  margin-top: 50px !important;
+  overflow: hidden;
+}
+
 .short-logo img {
   height: 300px !important;
   max-height: 30vw;
   object-fit: contain;
   padding: 0 16%;
   box-sizing: border-box;
-  background-color: #f5f5f5 !important;
+  background-color: transparent !important;
+  transition: transform 0.12s;
+  margin-bottom: 0 !important;
 }
 
-.short-logo.blue img {
+.short-logo a p::after {
+  content: "↗";
+  display: block;
+  position: absolute;
+  bottom: -12px;
+  font-size: 50px;
+}
+
+.short-logo p {
+  opacity: 0;
+  position: absolute;
+  top: -21px;
+  left: -60px;
+  width: 22%;
+  padding: 15px;
+  box-sizing: border-box;
+  height: 100%;
+  transition: 0.12s;
+  background-color: #e0e0e0;
+}
+
+.body.dark .short-logo p {
+  background-color: #444;
+}
+
+.short-logo:hover img {
+  transform: translate(7vw);
+}
+
+.short-logo:hover p {
+  opacity: 1;
+  left: 0;
+}
+
+.short-logo.blue {
   background-color: #a6def7 !important;
 }
 
-.short-logo.gray img {
+.short-logo.gray {
   background-color: #e8edef !important;
 }
 
-.short-logo.pink img {
+.short-logo.pink {
   background-color: #ff6677 !important;
 }
 
