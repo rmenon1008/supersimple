@@ -18,7 +18,7 @@ add_post_type_support('page', 'excerpt');
 include('shortcodes.php');
 
 // Enqueue jQuery to the site in compatability mode ("jQuery" instead of "$")
-wp_enqueue_script("jquery");
+// wp_enqueue_script("jquery");
 
 // VERY JANK
 // Fixes 404 error when using pagination
@@ -73,7 +73,7 @@ function bac_wp_strip_header_tags($text)
 {
     $raw_excerpt = $text;
     if (!has_excerpt()) {
-        if ('' == $text) {
+        // if ('' == $text) {
             //Retrieve the post content.
             $text = get_the_content('');
             //remove shortcode tags from the given content.
@@ -94,7 +94,7 @@ function bac_wp_strip_header_tags($text)
             $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end);
 
             $excerpt = wp_trim_words($text, $excerpt_length, $excerpt_more);
-        }
+        // }
         return apply_filters('wp_trim_excerpt', $excerpt, $raw_excerpt);
     } else {
         return $raw_excerpt;

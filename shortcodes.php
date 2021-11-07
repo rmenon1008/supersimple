@@ -16,7 +16,7 @@ function post_list_function($atts = array())
     'posts_per_page' => $posts,
     'category__not_in' => $exclude,
   ));
-  $output = '';
+
   if ($category == '') {
     $category = 'recent';
   }
@@ -80,6 +80,7 @@ function post_grid_function($atts = array())
     'tag' => '',
     'specific_posts' => null,
     'posts' => 999,
+    'tag_filters' => null,
   ), $atts));
 
   if ($specific_posts) {
@@ -101,21 +102,37 @@ function post_grid_function($atts = array())
     ));
   }
 
-  $output = '';
-
   if ($the_query->have_posts()) :
     ob_start();
     echo "<div class='post_grid'>";
+
+    if ($tag_filters) {
+      $tags = get_tags();
+      echo "<div class='tag_filter'>";
+      // echo "<a tag='all' href='?tag=all'>all</a>";
+      foreach ($tags as $tag) {
+        echo "<a tag='" . $tag->name . "' href='?tag=" . $tag->name . "'>" . $tag->name . "</a>";
+      }
+      
+      echo "</div>";
+    }
+
     echo "<div class='image-grid'>";
     $animate_order = -1;
     while ($the_query->have_posts()) : $the_query->the_post();
       $animate_order++;
+      $posttags = get_the_tags();
+      $tag_string = '';
+      if ($posttags) {
+        foreach ($posttags as $tag) {
+          $tag_string .= $tag->name . ' ';
+        }
+      }
       if ($log) {
         $posttags = get_the_date();
         echo '<div class="image-grid-item log" style="--animation-order:' . $animate_order . ';">';
       } else {
-        $posttags = get_the_tags();
-        echo '<div class="image-grid-item" style="--animation-order:' . $animate_order . ';">';
+        echo '<div class="image-grid-item" style="--animation-order:' . $animate_order . ';" tags="'. $tag_string .'">';
       }
     ?>
 
@@ -127,18 +144,18 @@ function post_grid_function($atts = array())
         <div class="gallery-text">
           <h3><?php the_title(); ?></h3>
           <?php
-          $posttags = array_slice($posttags, 0, 1);
-          if ($posttags) {
-            if (gettype($posttags) == 'array') {
-              foreach ($posttags as $tag) {
-                $status = $tag->name . ' ';
-                $link =  get_tag_link($tag->term_id);
-                echo "<a class='status' href='{$link}'>{$status}</a>";
-              }
-            } else if (gettype($posttags) == 'string') {
-              echo "<a class='status' href='{#}'>{$posttags}</a>";
-            }
-          }
+          // $posttags = array_slice($posttags, 0, 1);
+          // if ($posttags) {
+          //   if (gettype($posttags) == 'array') {
+          //     foreach ($posttags as $tag) {
+          //       $status = $tag->name . ' ';
+          //       $link =  get_tag_link($tag->term_id);
+          //       echo "<a class='status' href='{$link}'>{$status}</a>";
+          //     }
+          //   } else if (gettype($posttags) == 'string') {
+          //     echo "<a class='status' href='{#}'>{$posttags}</a>";
+          //   }
+          // }
           ?>
           <?php the_excerpt();
           if ($log) {
@@ -156,6 +173,32 @@ function post_grid_function($atts = array())
     echo "<div class='image-grid-item invisible'></div>";
     echo "<div class='image-grid-item invisible'></div>";
     echo "</div>";
+    ?>
+
+    <script>
+      var posts = document.querySelectorAll('.image-grid-item');
+      var selected_tag = new URLSearchParams(window.location.search).get('tag');
+      
+      var selected_link = document.querySelector('.tag_filter a[tag="' + selected_tag + '"]');
+      selected_link.classList.add('selected');
+      selected_link.href = window.location.href.split('?')[0];
+      
+      if (selected_tag) {
+        var j = 0;
+        for (var i = 0; i < posts.length; i++) {
+          var tags = posts[i].getAttribute('tags');
+          if (!tags.includes(selected_tag)) {
+            posts[i].style.display='none';
+          }
+          else {
+            posts[i].style.setProperty('--animation-order', j);
+            j++;
+          }
+        }
+      }
+    </script>
+
+    <?php
     echo "</div>";
     return ob_get_clean();
     wp_reset_postdata();

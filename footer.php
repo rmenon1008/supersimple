@@ -31,10 +31,10 @@
                     </td>
                     <td class="td2">
                         <h3>pages</h3>
-                        <a href="/"> Home</a> <br>
-                        <a href="/research"> Research</a> <br>
-                        <a href="/projects"> Projects</a> <br>
-                        <a href="/log-book"> Log Book</a> <br>
+                        <a href="/">Home</a> <br>
+                        <a href="/featured">Featured</a> <br>
+                        <a href="/projects">Projects</a> <br>
+                        <a href="/log-book">Log Book</a> <br>
                     </td>
                     <td class="td3">
                         <h3>connect</h3>
@@ -62,7 +62,14 @@
     </style>
 </noscript>
 <script>
-    Promise.all(Array.from(document.querySelectorAll('.batch-load')).filter(img => !img.complete).map(img => new Promise(resolve => {
+    function isVisible(element) {
+        return (element.offsetWidth > 0 ||
+            element.offsetHeight > 0 ||
+            element.getClientRects().length > 0);
+    }
+
+    var elements = Array.from(document.querySelectorAll('.batch-load')).filter(isVisible).slice(0, 6)
+    Promise.all(elements.filter(img => !img.complete).map(img => new Promise(resolve => {
         img.onload = img.onerror = resolve;
     }))).then(() => {
         setImageOpacity(1)
