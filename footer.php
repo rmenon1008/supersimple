@@ -17,8 +17,35 @@
 </div><!-- #page -->
 <footer>
 
+    <style>
+        <?php
+            $number = (get_the_ID() + 2) % 3 + 1;
+            if ($number == 1) {
+                $image = get_template_directory_uri() . "/images/footer-1.svg";
+                $text = '42°40\'13.8"N 73°04\'08.2"W';
+                $link = "https://www.google.com/maps/place/42%C2%B040'13.8%22N+73%C2%B004'08.2%22W/";
+            } elseif ($number == 2) {
+                $image = get_template_directory_uri() . "/images/footer-2.svg";
+                $text = '63°32\'50.0"N 18°49\'41.0"W';
+                $link = "https://www.google.com/maps/place/63%C2%B032'50.0%22N+18%C2%B049'41.0%22W/";
+            } elseif ($number == 3) {$image = get_template_directory_uri() . "/images/footer-1.svg";
+                $image = get_template_directory_uri() . "/images/footer-3.svg";
+                $text = '42°35\'26.1"N 74°21\'33.5"W';
+                $link = "https://www.google.com/maps?q=loc:42.590586,-74.359296";
+            }
+        ?>
+        .footer-image {
+            background-image: url('<?php echo $image?>');
+        }
+    </style>
+    <div class="footer-image">
+        <p>
+            <a href="<?php echo $link?>">
+                <?php echo $text?>
+            </a>
+        </p>
+    </div>
 
-    <div class="footer-image"></div>
     <div class="footer-content">
         <div class="content">
 
@@ -26,13 +53,13 @@
                 <tr>
                     <td class="td1">
                         <h3>rohan menon</h3>
-                        I’m a freshman at The University of Washington with interests in robotics, electronics, design, politics and more. This website documents some of my past and current projects.
+                        I’m a student at The University of Washington with interests in robotics, electronics, design, politics and more. This website documents some of my past and current projects.
                         <a style="line-height:2" href="mailto:me@rohanmenon.com" target="_blank">me@rohanmenon.com</a>
                     </td>
                     <td class="td2">
                         <h3>pages</h3>
                         <a href="/">Home</a> <br>
-                        <a href="/featured">Featured</a> <br>
+                        <a href="/spotlight">Spotlight</a> <br>
                         <a href="/projects">Projects</a> <br>
                         <a href="/log-book">Log Book</a> <br>
                     </td>

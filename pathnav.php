@@ -11,10 +11,7 @@
     <h1 id="pathString">/</h1>
     <div id="haze"></div>
 </div>
-<?php
-$title_string = get_the_title();
-
-?>
+<?php $title_string = get_the_title(); ?>
 
 <h1 id="title" class="glide-in">
     <span class="text-wrapper">

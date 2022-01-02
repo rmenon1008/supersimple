@@ -62,6 +62,9 @@ if (!function_exists('post_is_in_descendant_category')) {
 function enqueue_scripts()
 {
     // wp_enqueue_script('mouse', get_template_directory_uri() . '/scripts/mouse.js', array(), true);
+    if (is_page('rohan-menon')) {
+        wp_enqueue_script('rohan-menon', get_template_directory_uri() . '/scripts/front-page.js', array(), true);
+    }
     wp_enqueue_script('anime', 'https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js', array(), true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
@@ -74,26 +77,26 @@ function bac_wp_strip_header_tags($text)
     $raw_excerpt = $text;
     if (!has_excerpt()) {
         // if ('' == $text) {
-            //Retrieve the post content.
-            $text = get_the_content('');
-            //remove shortcode tags from the given content.
-            $text = strip_shortcodes($text);
-            $text = apply_filters('the_content', $text);
-            $text = str_replace(']]>', ']]&gt;', $text);
+        //Retrieve the post content.
+        $text = get_the_content('');
+        //remove shortcode tags from the given content.
+        $text = strip_shortcodes($text);
+        $text = apply_filters('the_content', $text);
+        $text = str_replace(']]>', ']]&gt;', $text);
 
-            //Regular expression that strips the header tags and their content.
-            $regex = '#(<h([1-6])[^>]*>)\s?(.*)?\s?(<\/h\2>)#';
-            $text = preg_replace($regex, '', $text);
+        //Regular expression that strips the header tags and their content.
+        $regex = '#(<h([1-6])[^>]*>)\s?(.*)?\s?(<\/h\2>)#';
+        $text = preg_replace($regex, '', $text);
 
-            /***Change the excerpt word count.***/
-            $excerpt_word_count = 55; //This is WP default.
-            $excerpt_length = apply_filters('excerpt_length', $excerpt_word_count);
+        /***Change the excerpt word count.***/
+        $excerpt_word_count = 55; //This is WP default.
+        $excerpt_length = apply_filters('excerpt_length', $excerpt_word_count);
 
-            /*** Change the excerpt ending.***/
-            $excerpt_end = '[...]'; //This is the WP default.
-            $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end);
+        /*** Change the excerpt ending.***/
+        $excerpt_end = '[...]'; //This is the WP default.
+        $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end);
 
-            $excerpt = wp_trim_words($text, $excerpt_length, $excerpt_more);
+        $excerpt = wp_trim_words($text, $excerpt_length, $excerpt_more);
         // }
         return apply_filters('wp_trim_excerpt', $excerpt, $raw_excerpt);
     } else {
@@ -169,3 +172,39 @@ function create_meta_desc()
     }
 }
 add_action('wp_head', 'create_meta_desc');
+
+function ow_create_sitemap()
+{
+    $postsForSitemap = get_posts(array(
+        'numberposts' => -1,
+        'orderby'     => 'modified',
+        // 'custom_post' should be replaced with your own Custom Post Type (one or many)
+        'post_type'   => array('post', 'page', 'custom_post'),
+        'order'       => 'DESC'
+    ));
+
+    $sitemap = '<?xml version="1.0" encoding="UTF-8"?>';
+    $sitemap .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
+
+    foreach ($postsForSitemap as $post) {
+        setup_postdata($post);
+
+        $postdate = explode(" ", $post->post_modified);
+
+        $sitemap .= '<url>' .
+            '<loc>' . get_permalink($post->ID) . '</loc>' .
+            '<lastmod>' . $postdate[0] . '</lastmod>' .
+            '<changefreq>monthly</changefreq>' .
+            '</url>';
+    }
+
+    $sitemap .= '</urlset>';
+
+    $fp = fopen(ABSPATH . 'sitemap.xml', 'w');
+
+    fwrite($fp, $sitemap);
+    fclose($fp);
+}
+add_action('publish_post', 'ow_create_sitemap');
+add_action('publish_page', 'ow_create_sitemap');
+add_action('save_post',    'ow_create_sitemap');

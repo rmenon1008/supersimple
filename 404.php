@@ -10,7 +10,7 @@ get_header();
 ?>
 <div>
     <div id="path">
-        <h1 id="pathString">/</h1>
+        <h1 id="pathString">?/</h1>
         <div id="haze"></div>
     </div>
     <h1 id="title" class="glide-in">

@@ -87,6 +87,7 @@ function post_grid_function($atts = array())
     $the_query = new WP_Query(array(
       'post_name__in' => explode(",", $specific_posts),
       'post_status' => 'publish',
+      'orderby' => 'post_name__in',
     ));
   } elseif ($tag) {
     $the_query = new WP_Query(array(
