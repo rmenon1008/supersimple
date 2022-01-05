@@ -746,8 +746,8 @@ gray {
   content: "/";
   width: 0;
   display: inline-block;
-  margin-left: -0.45em;
-  margin-right: 0.45em;
+  margin-left: -0.41em;
+  margin-right: 0.41em;
   color: var(--emph11);
   transition: 0.12s;
 }
@@ -1051,6 +1051,83 @@ gray {
   background-color: var(--emph14);
 }
 
+
+.search {
+  width: 100%;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.search input {
+  padding:0;
+  padding-bottom: 7px;
+  margin:0;
+  font-size: 75px;
+  font-family: Space;
+  font-weight: 700;
+  border:0;
+  width: 100%;
+  outline: 0!important;
+  border-bottom: 5px var(--emph12) solid;
+  padding-right: 75px;
+}
+
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
+input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
+
+
+.search input:focus {
+  border-bottom-color: var(--emph1);
+}
+
+.search input::placeholder {
+  color: var(--emph12) !important;
+}
+
+
+
+
+.search button {
+  position: absolute;
+  bottom: calc(3.8em + 20px);
+  right: 0;
+  width: 4.7em;
+  height: 2em;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color:var(--emph12)
+}
+
+#title:focus-within button {
+  color:var(--emph1)
+}
+
+.sad-face {
+  color:var(--emph13);
+  font-size: 100px;
+  text-align: center;
+  width: 100%;
+  margin-top: 100px;
+  animation: fadeIn 0.5s;
+}
+
+.sad-face.description {
+  font-size: 30px;
+  margin-top: -10px;
+  color: var(--emph12)
+}
+
+
+
+
 /***** MOBILE ADJUSTMENTS *****/
 
 @media (max-width: 1100px) {
@@ -1064,6 +1141,15 @@ gray {
 
   h1 {
     font-size: 55px;
+  }
+
+  .search input {
+    font-size: 55px;
+  }
+
+  .search button {
+    width: 3.5em;
+    bottom: calc(2.8em + 20px);
   }
 
   h2 {
@@ -1129,6 +1215,52 @@ gray {
   }
 }
 
+.footer-search button {
+  position: absolute;
+  bottom: 7px;
+  right: 0;
+  width: 2em;
+  height: 2em;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  color:var(--footer1)
+}
+
+.footer-search {
+  margin: -7px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 7px;
+  position: relative;
+}
+
+.footer-search input:focus {
+  border-bottom-color: var(--emph1);
+}
+
+.footer-search input::placeholder {
+  color: var(--footer1) !important;
+}
+
+.footer-search:focus-within button {
+  color:var(--emph1)
+}
+
+.footer-search input {
+  border: none;
+  border-bottom: 2px var(--footer1) solid;
+  display: inline-block;
+  outline: none !important;
+  padding: 7px;
+  padding-right: 50px;
+  padding-left: 0;
+  width: 100%;
+  font-size: 23px;
+  font-family: Space, Helvetica, sans-serif, bold;
+  color: var(--emph1) !important;
+}
+
 .footer-image {
   background-image: url(/wp-content/uploads/2021/05/footer.svg);
   background-repeat: no-repeat;
@@ -1173,20 +1305,21 @@ gray {
 
 .footer-table td {
   color: var(--footer2) !important;
-  padding: 20px;
+  padding: 20px 30px;
 }
 
 .footer-table .td1 {
-  width: 50%;
+  width: 73%;
 }
 .footer-table .td2 {
-  width: 15%;
+  width: 13%;
 }
 .footer-table .td3 {
   width: 15%;
 }
 .footer-table .td4 {
-  width: 20%;
+  min-width: 210px;
+  box-sizing: border-box;
   text-align: right;
 }
 
@@ -1201,8 +1334,9 @@ gray {
   .footer-table::after {
     display: block;
     content: "Rohan Menon 2021";
-    margin-left: 20px;
+    margin-left: 30px;
     padding-top: 20px;
+    color: var(--footer2)
   }
 }
 
@@ -1531,3 +1665,15 @@ ul.wp-block-social-links {
 body.dark .image-gallery-small-haze {
   background: linear-gradient(180deg, #22222200 0%, #222 100%);
 }
+
+/* h3 {
+  display: flex;
+}
+
+h3::after {
+  flex: 1;
+  content: "";
+  margin-left: 0.6em;
+  margin-top: 0.65em;
+  height: 2px;
+} */

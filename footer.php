@@ -52,9 +52,12 @@
             <table class="footer-table">
                 <tr>
                     <td class="td1">
-                        <h3>rohan menon</h3>
-                        I’m a student at The University of Washington with interests in robotics, electronics, design, politics and more. This website documents some of my past and current projects.
-                        <a style="line-height:2" href="mailto:me@rohanmenon.com" target="_blank">me@rohanmenon.com</a>
+                        <div class="footer-search">
+                            <?php get_search_form(); ?>
+                        </div>
+                        <!-- <h3>rohan menon</h3> -->
+                        <br>I’m a student at The University of Washington with interests in robotics, electronics, design, politics and more. This website documents some of my past and current projects.
+                        <!-- <a style="line-height:2" href="mailto:me@rohanmenon.com" target="_blank">me@rohanmenon.com</a> -->
                     </td>
                     <td class="td2">
                         <h3>pages</h3>
@@ -68,6 +71,7 @@
                         <a href="https://www.linkedin.com/in/rohan-menon-46518415a/"> LinkedIn ↗</a> <br>
                         <a href="https://hackaday.io/rohanmenon"> Hackaday ↗</a> <br>
                         <a target="_blank" href="mailto:me@rohanmenon.com"> Email ↗</a> <br>
+						<a target="_blank" href="https://rohanmenon.com/feed/"> RSS Feed</a> <br>
                     </td>
                     <td class="td4">
                         <h3><a class="back-to-top" href="#">back to top</a></h3>
