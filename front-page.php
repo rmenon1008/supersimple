@@ -35,7 +35,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 </h1>
 
 
-                <ul class="wp-block-social-links has-medium-icon-size is-style-pill-shape" style="float: right; margin-top: 20px;">
+                <ul class="wp-block-social-links has-medium-icon-size is-style-pill-shape" style="float: right; margin-top: 17px;">
                     <li tabindex="0" role="button" aria-label="Copy email" class="wp-social-link wp-social-link wp-block-social-link" id="email-copy" style="cursor:pointer; animation-delay: 0.1s;"><span slide-label="Copy email" class="wp-block-social-link-anchor"><svg id="email-success" width="24" height="24" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
                                 <path d="M20,4H4C2.895,4,2,4.895,2,6v12c0,1.105,0.895,2,2,2h16c1.105,0,2-0.895,2-2V6C22,4.895,21.105,4,20,4z M20,8.236l-8,4.882 L4,8.236V6h16V8.236z"></path>
                             </svg></span></li>

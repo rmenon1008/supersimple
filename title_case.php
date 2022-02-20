@@ -9,7 +9,7 @@ function titleCase($string) {
     $string_array = explode(" ", $string);
 
     $no_capitalization = ["of", "a", "an", "the", "but", "or", "at", "on", "in", "by", "for", "to", "and"];
-    $all_caps = ["ny", "stem", "steam", "un", "edaas"];
+    $all_caps = ["ny", "stem", "steam", "un", "edaas", "wisp", "uw"];
 
     foreach ($string_array as &$word) {
         // Capitalize all first letters in all words

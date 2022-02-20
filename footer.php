@@ -20,18 +20,24 @@
     <style>
         <?php
             $number = (get_the_ID() + 2) % 3 + 1;
+            
+            //check if page is front page
+            if (is_front_page()) {
+                $number = 1;
+            }
+
             if ($number == 1) {
                 $image = get_template_directory_uri() . "/images/footer-1.svg";
                 $text = '42°40\'13.8"N 73°04\'08.2"W';
-                $link = "https://www.google.com/maps/place/42%C2%B040'13.8%22N+73%C2%B004'08.2%22W/";
+                $link = "https://earth.google.com/web/search/42.670500,+-73.068944/@42.67067778,-73.06927802,765.11741098a,968.46282437d,35y,49.61675811h,74.30133834t,0r/data=ClkaLxIpGef7qfHSVUVAIVlQGJRpRFLAKhU0Mi42NzA1MDAsIC03My4wNjg5NDQYASABIiYKJAnxGc_O5rRFQBGKAcHZ4EVFQBlUOMzfsTlSwCFs2m_RZdJSwA";
             } elseif ($number == 2) {
                 $image = get_template_directory_uri() . "/images/footer-2.svg";
                 $text = '63°32\'50.0"N 18°49\'41.0"W';
-                $link = "https://www.google.com/maps/place/63%C2%B032'50.0%22N+18%C2%B049'41.0%22W/";
+                $link = "https://earth.google.com/web/search/63%c2%b032%2750.0%22N+18%c2%b049%2741.0%22W/@63.5424708,-18.83109461,191.32970845a,1743.6139011d,35y,-164.64795813h,77.17998003t,0r/data=CigiJgokCb4L1HFRTEVAEc0sJFj4SkVAGWLWZ3Q2llLAIQKuVXxPl1LA";
             } elseif ($number == 3) {$image = get_template_directory_uri() . "/images/footer-1.svg";
                 $image = get_template_directory_uri() . "/images/footer-3.svg";
                 $text = '42°35\'26.1"N 74°21\'33.5"W';
-                $link = "https://www.google.com/maps?q=loc:42.590586,-74.359296";
+                $link = "https://earth.google.com/web/search/42.590586,+-74.359296/@42.58226419,-74.3577924,194.50071051a,1695.06109512d,35y,-163.46754185h,72.96910739t,0r/data=CigiJgokCd4IPXFUV0VAEfeU9xc2VUVAGWGKoZV0Q1LAIfJ2NEbvRFLA";
             }
         ?>
         .footer-image {
@@ -39,7 +45,7 @@
         }
     </style>
     <div class="footer-image">
-        <p>
+        <p>from a photo taken at 
             <a href="<?php echo $link?>">
                 <?php echo $text?>
             </a>
@@ -56,7 +62,8 @@
                             <?php get_search_form(); ?>
                         </div>
                         <!-- <h3>rohan menon</h3> -->
-                        <br>I’m a student at The University of Washington with interests in robotics, electronics, design, politics and more. This website documents some of my past and current projects.
+                        
+                        <br><b style="display:inline-block; margin-top:5px; color:var(--footer1)">rohan menon</b> — I’m a student at The University of Washington with interests in robotics, electronics, design, politics and more. This website documents some of my past and current projects.
                         <!-- <a style="line-height:2" href="mailto:me@rohanmenon.com" target="_blank">me@rohanmenon.com</a> -->
                     </td>
                     <td class="td2">
@@ -75,7 +82,7 @@
                     </td>
                     <td class="td4">
                         <h3><a class="back-to-top" href="#">back to top</a></h3>
-                        2021 Rohan Menon
+                        <br><br><br>2021 Rohan Menon
                     </td>
                 </tr>
             </table>
@@ -99,7 +106,7 @@
             element.getClientRects().length > 0);
     }
 
-    var elements = Array.from(document.querySelectorAll('.batch-load')).filter(isVisible).slice(0, 6)
+    var elements = Array.from(document.querySelectorAll('img.batch-load, .batch-load img')).filter(isVisible).slice(0, 6)
     Promise.all(elements.filter(img => !img.complete).map(img => new Promise(resolve => {
         img.onload = img.onerror = resolve;
     }))).then(() => {

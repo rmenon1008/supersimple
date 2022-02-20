@@ -111,8 +111,10 @@ function post_grid_function($atts = array())
       $tags = get_tags();
       echo "<div class='tag_filter'>";
       // echo "<a tag='all' href='?tag=all'>all</a>";
+      $animate_order = count($tags);
       foreach ($tags as $tag) {
-        echo "<a tag='" . $tag->name . "' href='?tag=" . $tag->name . "'>" . $tag->name . "</a>";
+        $animate_order--;
+        echo "<a style='--animation-order:" . $animate_order . ";' tag='" . $tag->name . "' href='?tag=" . $tag->name . "'>" . $tag->name . "</a>";
       }
       
       echo "</div>";

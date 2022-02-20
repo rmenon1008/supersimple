@@ -127,7 +127,7 @@ get_header();
         <?php
             endwhile;
         else:
-            echo "<div class='sad-face'>(^⌒^)</div>";
+            echo "<div class='sad-face'>(^︹^)</div>";
             echo "<div class='sad-face description'>no results</div>";
         endif;
         ?>
@@ -139,8 +139,8 @@ get_header();
 
 the_posts_pagination(array(
     'mid_size' => 5,
-    'prev_text' => __('<b>❬</b>', 'textdomain'),
-    'next_text' => __('<b>❭</b>', 'textdomain'),
+    'prev_text' => __('<b>🡨</b>', 'textdomain'),
+    'next_text' => __('<b>🡪</b>', 'textdomain'),
     'before_page_number' => '',
     'after_page_number'  => '',
 ));

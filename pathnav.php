@@ -60,6 +60,7 @@
             words[i].innerHTML = words[i].textContent.replace(/\S/g, "<span class='letter'>$&</span>");
         }
     if (!skipAnimation) {
+        document.querySelector('#main').classList.add("animate-tag-filter");
         anime.timeline()
             .add({
                 targets: '.glide-in .letter',
