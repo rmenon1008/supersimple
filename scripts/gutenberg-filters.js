@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+document.addEventListener('DOMContentLoaded', (event) => {
     [...document.getElementsByClassName("wp-block-video")].forEach(function (videoContainer) {
 
         if (! videoContainer.querySelector('video').hasAttribute("controls")) {

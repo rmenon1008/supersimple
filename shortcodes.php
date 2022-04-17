@@ -116,7 +116,7 @@ function post_grid_function($atts = array())
         $animate_order--;
         echo "<a style='--animation-order:" . $animate_order . ";' tag='" . $tag->name . "' href='?tag=" . $tag->name . "'>" . $tag->name . "</a>";
       }
-      
+
       echo "</div>";
     }
 
@@ -135,7 +135,7 @@ function post_grid_function($atts = array())
         $posttags = get_the_date();
         echo '<div class="image-grid-item log" style="--animation-order:' . $animate_order . ';">';
       } else {
-        echo '<div class="image-grid-item" style="--animation-order:' . $animate_order . ';" tags="'. $tag_string .'">';
+        echo '<div class="image-grid-item" style="--animation-order:' . $animate_order . ';" tags="' . $tag_string . '">';
       }
     ?>
 
@@ -169,39 +169,49 @@ function post_grid_function($atts = array())
       </div>
       </div>
 
-<?php
+    <?php
     endwhile;
     echo "<div class='image-grid-item invisible'></div>";
     echo "<div class='image-grid-item invisible'></div>";
     echo "<div class='image-grid-item invisible'></div>";
     echo "<div class='image-grid-item invisible'></div>";
     echo "</div>";
+
+    if ($tag_filters) :
     ?>
 
-    <script>
-      var posts = document.querySelectorAll('.image-grid-item');
-      var selected_tag = new URLSearchParams(window.location.search).get('tag');
-      
-      var selected_link = document.querySelector('.tag_filter a[tag="' + selected_tag + '"]');
-      selected_link.classList.add('selected');
-      selected_link.href = window.location.href.split('?')[0];
-      
-      if (selected_tag) {
-        var j = 0;
-        for (var i = 0; i < posts.length; i++) {
-          var tags = posts[i].getAttribute('tags');
-          if (!tags.includes(selected_tag)) {
-            posts[i].style.display='none';
-          }
-          else {
-            posts[i].style.setProperty('--animation-order', j);
-            j++;
-          }
-        }
-      }
-    </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
 
-    <?php
+          var posts = document.querySelectorAll('.image-grid-item');
+          var selected_tag = new URLSearchParams(window.location.search).get('tag');
+
+          var selected_link = document.querySelector('.tag_filter a[tag="' + selected_tag + '"]');
+          if (selected_link) {
+            selected_link.classList.add('selected');
+            selected_link.href = window.location.href.split('?')[0];
+          }
+
+          if (selected_tag) {
+            var j = 0;
+            for (var i = 0; i < posts.length; i++) {
+              var tags = posts[i].getAttribute('tags');
+              if (tags) {
+                if (!tags.includes(selected_tag)) {
+                  posts[i].style.display = 'none';
+                } else {
+                  posts[i].style.setProperty('--animation-order', j);
+                  j++;
+                }
+              }
+            }
+          }
+        })
+      </script>
+
+<?php
+    endif;
+
     echo "</div>";
     return ob_get_clean();
     wp_reset_postdata();

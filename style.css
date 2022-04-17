@@ -36,8 +36,6 @@
 
 ***************************************/
 
-
-
 /**************************************
   1. GLOBAL
 ***************************************/
@@ -51,23 +49,23 @@ body {
   font-family: var(--fonts);
   --max-width: 1050px;
 
-  --emph1:#000;
-  --emph2:#111;
-  --emph3:#222;
-  --emph4:#333;
-  --emph5:#444;
-  --emph6:#555;
-  --emph7:#666;
-  --emph8:#777;
-  --emph9:#888;
-  --emph10:#999;
-  --emph11:#aaa;
-  --emph12:#bbb;
-  --emph13:#ccc;
-  --emph14:#ddd;
-  --emph15:#e5e5e5;
-  --emph16:#f5f5f5;
-  --bg:rgb(255, 255, 255);
+  --emph1: #000;
+  --emph2: #111;
+  --emph3: #222;
+  --emph4: #333;
+  --emph5: #444;
+  --emph6: #555;
+  --emph7: #666;
+  --emph8: #777;
+  --emph9: #888;
+  --emph10: #999;
+  --emph11: #aaa;
+  --emph12: #bbb;
+  --emph13: #ccc;
+  --emph14: #ddd;
+  --emph15: #e5e5e5;
+  --emph16: #f5f5f5;
+  --bg: rgb(255, 255, 255);
 
   --footer1: #949494;
   --footer2: #767676;
@@ -77,23 +75,23 @@ body {
 }
 
 body.dark {
-  --emph1:#fff;
-  --emph2:#eee;
-  --emph3:#ddd;
-  --emph4:#ddd;
-  --emph5:#ccc;
-  --emph6:#bbb;
-  --emph7:#aaa;
-  --emph8:#999;
-  --emph9:#777;
-  --emph10:#666;
-  --emph11:#555;
-  --emph12:#444;
-  --emph13:#444;
-  --emph14:#333;
-  --emph15:#383838;
-  --emph16:#f5f5f5;
-  --bg:#222;
+  --emph1: #fff;
+  --emph2: #eee;
+  --emph3: #ddd;
+  --emph4: #ddd;
+  --emph5: #ccc;
+  --emph6: #bbb;
+  --emph7: #aaa;
+  --emph8: #999;
+  --emph9: #777;
+  --emph10: #666;
+  --emph11: #555;
+  --emph12: #444;
+  --emph13: #444;
+  --emph14: #333;
+  --emph15: #383838;
+  --emph16: #f5f5f5;
+  --bg: #222;
 
   --footer1: #6d6d6d;
   --footer2: #898989;
@@ -130,8 +128,6 @@ body {
   }
 }
 
-
-
 /**************************************
   2. BROWSER CHANGES
 ***************************************/
@@ -157,15 +153,13 @@ body {
 ::-moz-selection {
   /* Code for Firefox */
   color: var(--bg);
-  background: var(--emph1);;
+  background: var(--emph1);
 }
 
 ::selection {
   color: var(--bg);
   background: var(--emph1);
 }
-
-
 
 /**************************************
   3. TYPOGRAPHY
@@ -236,7 +230,6 @@ h4 {
 }
 
 h5 {
-  
   font-weight: 300;
   font-size: 23px;
   margin: 0.5em 0;
@@ -269,16 +262,10 @@ a.nostyle {
     font-size: 20px;
   }
 
-  h1 {
-    font-size: 55px;
-  }
-
   h2 {
     font-size: 35px;
   }
 }
-
-
 
 /**************************************
   4. HEADER
@@ -350,7 +337,6 @@ header nav ul li a[aria-current="page"] {
   }
 }
 
-
 /* 4.2 Title **************************/
 
 h1 {
@@ -363,18 +349,16 @@ h1 {
   max-width: 100%;
   vertical-align: top;
   margin-bottom: 15px;
+  user-select: none;
 }
 
-h1#title.long-name {
+h1.long-name {
   max-width: var(--max-width);
   word-break: break-all;
+  text-transform: none;
 }
 
 @media (max-width: 1100px) {
-  #title {
-    padding-top: 8px;
-  }
-
   #title-window::-webkit-scrollbar {
     display: none;
   }
@@ -383,8 +367,16 @@ h1#title.long-name {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-}
 
+  h1 {
+    padding-top: 8px;
+    font-size: 50px;
+  }
+
+  h1.name {
+    font-size: 70px;
+  }
+}
 
 /* 4.3 Path ***************************/
 
@@ -413,7 +405,11 @@ h1#title.long-name {
   width: calc((100vw - 1050px) / 2);
   height: 8rem;
   pointer-events: none;
-  background: linear-gradient(90deg, var(--bg) 10%, rgba(255, 255, 255, 0) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--bg) 10%,
+    rgba(255, 255, 255, 0) 100%
+  );
   transition: filter 0.12s;
 }
 
@@ -425,10 +421,9 @@ h1#title.long-name {
 
   #haze {
     width: 25px !important;
-    height: 5rem !important;
+    height: 8rem !important;
   }
 }
-
 
 /* 4.4 Title Animation *****************/
 
@@ -461,7 +456,6 @@ h1#title.long-name {
   }
 }
 
-
 /* 4.5 Tag List ***********************/
 
 .post-tags {
@@ -484,8 +478,6 @@ h1#title.long-name {
   white-space: nowrap;
 }
 
-
-
 /**************************************
   5. ANIMATIONS
 ***************************************/
@@ -497,7 +489,7 @@ h1#title.long-name {
 
   100% {
     opacity: 1;
-    transform: translate(0,0);
+    transform: translate(0, 0);
   }
 }
 
@@ -511,7 +503,6 @@ h1#title.long-name {
     opacity: 1;
   }
 }
-
 
 @keyframes glide {
   0% {
@@ -527,8 +518,6 @@ h1#title.long-name {
     opacity: 1;
   }
 }
-
-
 
 /**************************************
   6. ARTICLE
@@ -586,7 +575,6 @@ h1#title.long-name {
   border-radius: 5px;
 }
 
-
 /* 6.2 Media **************************/
 
 .detail img {
@@ -638,8 +626,6 @@ h1#title.long-name {
   max-height: 56vw;
 }
 
-
-
 /**************************************
   7. IMAGES
 ***************************************/
@@ -657,8 +643,6 @@ img {
   transition: opacity 0.4s !important;
 }
 
-
-
 /**************************************
   8. SEARCH PAGE
 ***************************************/
@@ -670,29 +654,39 @@ img {
 }
 
 .search input {
-  padding:0;
+  padding: 0;
   padding-bottom: 7px;
-  margin:0;
+  margin: 0;
   font-size: 75px;
   font-family: Space;
   font-weight: 700;
-  border:0;
+  border: 0;
   width: 100%;
-  outline: 0!important;
+  outline: 0 !important;
   border-bottom: 5px var(--emph12) solid;
   padding-right: 75px;
   background-color: var(--bg);
-  color: var(--emph1)
+  color: var(--emph1);
 }
 
 /* clears the ‘X’ from Internet Explorer */
-input[type=search]::-ms-clear { display: none; width : 0; height: 0; }
-input[type=search]::-ms-reveal { display: none; width : 0; height: 0; }
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
 /* clears the ‘X’ from Chrome */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { display: none; }
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
 
 .search input:focus {
   border-bottom-color: var(--emph1);
@@ -711,15 +705,15 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   background-color: transparent;
   border: none;
   padding: 0;
-  color:var(--emph12)
+  color: var(--emph12);
 }
 
 #title:focus-within button {
-  color:var(--emph1)
+  color: var(--emph1);
 }
 
 .sad-face {
-  color:var(--emph13);
+  color: var(--emph13);
   font-size: 100px;
   text-align: center;
   width: 100%;
@@ -730,7 +724,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .sad-face.description {
   font-size: 30px;
   margin-top: -10px;
-  color: var(--emph12)
+  color: var(--emph12);
 }
 
 @media (max-width: 1100px) {
@@ -743,8 +737,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     bottom: calc(2.8em + 20px);
   }
 }
-
-
 
 /**************************************
   9. FOOTER
@@ -759,7 +751,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
   background-color: transparent;
   border: none;
   padding: 0;
-  color:var(--footer1)
+  color: var(--footer1);
 }
 
 .footer-search {
@@ -779,7 +771,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 }
 
 .footer-search:focus-within button {
-  color:var(--emph1)
+  color: var(--emph1);
 }
 
 .footer-search input {
@@ -810,11 +802,11 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 .footer-image p {
   margin-left: 20px;
-  font-size:10px;
+  font-size: 10px;
   color: transparent;
   transition: color 0.12s;
   position: absolute;
-  top:-25px;
+  top: -25px;
 }
 
 .footer-image:hover p {
@@ -874,7 +866,7 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
     content: "Rohan Menon 2021";
     margin-left: 30px;
     padding-top: 20px;
-    color: var(--footer2)
+    color: var(--footer2);
   }
 }
 
@@ -895,8 +887,6 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 .back-to-top:hover::after {
   transform: translate(5px, -6px);
 }
-
-
 
 /**************************************
   10. PAGINATION
@@ -936,8 +926,6 @@ nav.navigation.pagination h2 {
   display: none;
 }
 
-
-
 /**************************************
   11. SPECIAL PAGES
 ***************************************/
@@ -947,7 +935,6 @@ nav.navigation.pagination h2 {
 #description {
   margin-top: -10px;
 }
-
 
 /* 11.2 Spotlight *********************/
 
@@ -991,7 +978,6 @@ nav.navigation.pagination h2 {
   display: block;
   transform: translate(-1em);
 }
-
 
 /* 11.3 Logo Page *********************/
 
@@ -1059,7 +1045,6 @@ nav.navigation.pagination h2 {
 .remove-space-above {
   margin-top: -20px;
 }
-
 
 /* 11.4 Resume Page *******************/
 
@@ -1129,7 +1114,6 @@ nav.navigation.pagination h2 {
   right: 3px;
 }
 
-
 /* 11.5 Admin View ********************/
 
 #wpadminbar {
@@ -1139,8 +1123,6 @@ nav.navigation.pagination h2 {
 body.admin-bar .content {
   min-height: calc(100vh - 167px);
 }
-
-
 
 /**************************************
   12. WIDGETS
@@ -1386,7 +1368,6 @@ body.dark .image-gallery-small-haze {
   }
 }
 
-
 /* 12.2 Post Grid *********************/
 
 .post_grid {
@@ -1571,7 +1552,6 @@ body.dark .image-gallery-small-haze {
   }
 }
 
-
 /* 12.3 Social Buttons ****************/
 
 .wp-block-social-links .wp-social-link {
@@ -1678,7 +1658,6 @@ ul.wp-block-social-links {
   width: 112px;
 }
 
-
 /* 12.4 Tag Filter ********************/
 
 .tag_filter {
@@ -1711,7 +1690,7 @@ ul.wp-block-social-links {
   animation: glide-in 0.35s;
   animation-fill-mode: forwards;
   animation-delay: calc(var(--animation-order) * 40ms);
-  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: top right;
   transform: rotate(40deg) translate(-30px, -50px);
   transition: 0.12s;
@@ -1730,7 +1709,6 @@ ul.wp-block-social-links {
   content: "✕";
   margin-right: 0.5em;
 }
-
 
 /* 12.5 Video *************************/
 

@@ -20,7 +20,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 
         <div id="post-<?php the_ID(); ?>">
             <div id="path">
-                <h1 id="pathString">/</h1>
+                <h1 id="pathString" class="name">/</h1>
                 <div id="haze"></div>
             </div>
             <?php
@@ -28,7 +28,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 
             ?>
             <div class="title-buttons" style="display:inline; width:100%">
-                <h1 id="title" class="glide-in">
+                <h1 class="glide-in name">
                     <span class="text-wrapper">
                         <span class="letters"><?php echo $title_string; ?></span>
                     </span>

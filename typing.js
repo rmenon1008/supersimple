@@ -23,8 +23,3 @@ function write(txt) {
         }
     }
 }
-
-jQuery(document).ready(function() {
-    write("hey there")
-    .then(write("i'm rohan"))
-});
