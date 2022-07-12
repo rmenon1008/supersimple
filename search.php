@@ -30,18 +30,18 @@ get_header();
     anime.timeline()
         .add({
             targets: '.glide-in .letter',
-            translateY: ["1.1em", 0],
+            translateY: ["1.25em", 0],
             translateX: ["-0.7em", 0],
             translateZ: 0,
             rotateZ: [80, 0],
             duration: 750,
-            easing: "easeOutExpo",
-            delay: (el, i) => 18 * i
+            easing: "cubicBezier(0.190, 1.000, 0.065, 1.000)",
+            delay: (el, i) => 25 * i
         }).add({
             targets: '.ml7',
             opacity: 0,
             duration: 1000,
-            easing: "easeOutExpo",
+            easing: "cubicBezier(0.190, 1.000, 0.065, 1.000)",
             delay: 1000
         });
 
@@ -139,8 +139,8 @@ get_header();
 
 the_posts_pagination(array(
     'mid_size' => 5,
-    'prev_text' => __('<b>🡨</b>', 'textdomain'),
-    'next_text' => __('<b>🡪</b>', 'textdomain'),
+    'prev_text' => __('<b>❬</b>', 'textdomain'),
+    'next_text' => __('<b>❭</b>', 'textdomain'),
     'before_page_number' => '',
     'after_page_number'  => '',
 ));

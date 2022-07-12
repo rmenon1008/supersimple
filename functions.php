@@ -65,7 +65,7 @@ function enqueue_scripts()
     if (is_page('rohan-menon')) {
         wp_enqueue_script('rohan-menon', get_template_directory_uri() . '/scripts/front-page.js', array(), true);
     }
-    wp_enqueue_script('anime', 'https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js', array(), true);
+    wp_enqueue_script('anime', 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js', array(), true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
 
@@ -128,12 +128,14 @@ add_action('after_setup_theme', 'theme_slug_setup');
 function filter_document_title_parts($title_parts)
 {
     include 'title_case.php';
+	
     $title_parts['title'] = titleCase($title_parts['title']);
 
     // Replace the home page URL with just the blog name
-    if ($title_parts['title'] == "Rohan Menon") {
-        $title_parts['title'] = '';
-    }
+    $title_parts['tagline'] = "";
+//     if ($title_parts['title'] == "Rohan Menon") {
+//         $title_parts = 'Rohan Menon';
+//     }
     return $title_parts;
 }
 add_filter('document_title_parts', 'filter_document_title_parts');

@@ -30,6 +30,8 @@ function post_list_function($atts = array())
     }
     //echo "<div class='post_list_haze'></div>";
     echo "<div class='scroll-window'>";
+    $stringed_cat = str_replace('-', ' ', $category);
+    echo "<div class='posts-list-title'>Related <b>".$stringed_cat."</b> posts</div>";
     // "<p>project logs</p>";
     $animate_order = -1;
     while ($the_query->have_posts()) : $the_query->the_post();
@@ -133,9 +135,9 @@ function post_grid_function($atts = array())
       }
       if ($log) {
         $posttags = get_the_date();
-        echo '<div class="image-grid-item log" style="--animation-order:' . $animate_order . ';">';
+        echo '<div class="image-grid-item log" style="--animation-order:' . $animate_order . '; --color: #defcf4">';
       } else {
-        echo '<div class="image-grid-item" style="--animation-order:' . $animate_order . ';" tags="' . $tag_string . '">';
+        echo '<div class="image-grid-item" style="--animation-order:' . $animate_order . '; --color: #defcf4" tags="' . $tag_string . '">';
       }
     ?>
 
@@ -176,6 +178,69 @@ function post_grid_function($atts = array())
     echo "<div class='image-grid-item invisible'></div>";
     echo "<div class='image-grid-item invisible'></div>";
     echo "</div>";
+
+    if (false):
+    ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.min.js" integrity="sha512-mMe7BAZPOkGbq+zhRBMNV3Q+5ZDzcUEOJoUYXbHpEcODkDBYbttaW7P108jX66AQgwgsAjvlP4Ayb/XLJZfmsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+      function rgbToHsl(r, g, b) {
+        r /= 255, g /= 255, b /= 255;
+        var max = Math.max(r, g, b),
+          min = Math.min(r, g, b);
+        var h, s, l = (max + min) / 2;
+
+        if (max == min) {
+          h = s = 0; // achromatic
+        } else {
+          var d = max - min;
+          s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+          switch (max) {
+            case r:
+              h = (g - b) / d + (g < b ? 6 : 0);
+              break;
+            case g:
+              h = (b - r) / d + 2;
+              break;
+            case b:
+              h = (r - g) / d + 4;
+              break;
+          }
+          h /= 6;
+        }
+
+        return [h * 360, "80%", "98%"];
+      }
+      // wait for document to be ready
+      var gridItems = document.querySelectorAll('.image-grid-item');
+      var colorThief = new ColorThief();
+
+      window.addEventListener("load", function(event) {
+        // iterate through each image
+        for (var i = 0; i < gridItems.length; i++) {
+          var item = gridItems[i];
+          var image = item.querySelector('img');
+          if (image) {
+            var color = colorThief.getColor(image);
+            var colorHSL = rgbToHsl(color[0], color[1], color[2]);
+            item.style.setProperty('--color', 'hsl(' + colorHSL[0] + ', ' + colorHSL[1] + ', ' + colorHSL[2] + ')');
+
+            item.addEventListener('mouseenter', function(event) {
+              console.log(colorHSL);
+              document.body.style.setProperty('--bg', this.style.getPropertyValue('--color'));
+            });
+
+            item.addEventListener('mouseleave', function(event) {
+              // document.body.style.setProperty('--bg', '#ffffff');
+            });
+          }
+
+        }
+      });
+    </script>
+
+
+    <?php
+    endif;
 
     if ($tag_filters) :
     ?>
@@ -232,3 +297,29 @@ function text_shortcode($atts = array(), $content = null)
   return '<a class="block-link nostyle" href=' . $link . ' ><div class="block-link-container" >' . $content . '</div></a>';
 }
 add_shortcode('card', 'text_shortcode');
+
+
+function pageless_doc_embed_function($atts = array())
+{
+  extract(shortcode_atts(array(
+    'url' => '#'
+  ), $atts));
+
+  $content = file_get_contents($url);
+  $content = preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $content);
+  $content = str_replace('<style type="text/css">', '<style type="text/css"> @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"); p { line-height: 1.4 !important; } .pageless-doc * { border-right: none !important; }', $content);
+  $content = str_replace('h1', 'doc-h1', $content);
+  $content = str_replace('h2', 'doc-h2', $content);
+  $content = str_replace('h3', 'doc-h3', $content);
+  $content = str_replace('h4', 'doc-h4', $content);
+  // $content = str_replace('<head>', '<head><base href="' . $url . '">', $content);
+
+  return '<div class="pageless-doc">'.$content.'</div>';
+}
+add_shortcode('pageless_doc', 'pageless_doc_embed_function');
+
+function site_desc_sc()
+{
+  return html_entity_decode(get_bloginfo('description', 'raw'));
+}
+add_shortcode( 'site_desc', 'site_desc_sc' );
