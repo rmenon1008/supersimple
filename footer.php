@@ -72,9 +72,9 @@
                         <h3>pages</h3>
                         <div class="body-content">
                             <a href="/">Home</a> <br>
-                            <a href="/spotlight">Spotlight</a> <br>
                             <a href="/projects">Projects</a> <br>
                             <a href="/log-book">Log Book</a> <br>
+                            <a href="/resume">Resume</a> <br>
                         </div>
                     </td>
                     <td class="td3">
@@ -82,7 +82,7 @@
                         <div class="body-content">
                             <a href="https://www.linkedin.com/in/rohan-menon-46518415a/"> LinkedIn ↗</a> <br>
                             <a href="https://github.com/rmenon1008"> GitHub ↗</a> <br>
-                            <a target="_blank" href="mailto:me@rohanmenon.com"> Email ↗</a> <br>
+                            <a target="_blank" href="mailto:rohan@rohanmenon.com"> Email ↗</a> <br>
                             <a target="_blank" href="https://rohanmenon.com/feed/"> RSS Feed</a> <br>
                         </div>
                     </td>

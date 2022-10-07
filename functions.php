@@ -65,7 +65,7 @@ function enqueue_scripts()
     if (is_page('rohan-menon')) {
         wp_enqueue_script('rohan-menon', get_template_directory_uri() . '/scripts/front-page.js', array(), true);
     }
-    wp_enqueue_script('anime', 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js', array(), true);
+    wp_enqueue_script('anime', get_template_directory_uri() . '/scripts/anime.js', array(), true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
 

@@ -76,7 +76,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 
                 document.getElementById("email-copy").addEventListener("click", function(event) {
 
-                    copyToClipboard("me@rohanmenon.com");
+                    copyToClipboard("rohan@rohanmenon.com");
                     document.querySelector(".wp-social-link#email-copy").classList.add("copied");
                     var spanElement = document.querySelector(".wp-social-link#email-copy span");
                     spanElement.setAttribute("slide-label", "Copied");

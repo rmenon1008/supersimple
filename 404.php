@@ -10,12 +10,12 @@ get_header();
 ?>
 <div>
     <div id="path">
-        <h1 id="pathString">?/</h1>
+        <h1 id="pathString">/</h1>
         <div id="haze"></div>
     </div>
     <h1 id="title" class="glide-in">
         <span class="text-wrapper">
-            <span class="letters">404 — page not found</span>
+            <span class="letters">page not found</span>
         </span>
     </h1>
 </div>

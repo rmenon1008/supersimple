@@ -31,7 +31,7 @@ function post_list_function($atts = array())
     //echo "<div class='post_list_haze'></div>";
     echo "<div class='scroll-window'>";
     $stringed_cat = str_replace('-', ' ', $category);
-    echo "<div class='posts-list-title'>Related <b>".$stringed_cat."</b> posts</div>";
+    echo "<div class='posts-list-title'>Related <b>" . $stringed_cat . "</b> posts</div>";
     // "<p>project logs</p>";
     $animate_order = -1;
     while ($the_query->have_posts()) : $the_query->the_post();
@@ -49,7 +49,7 @@ function post_list_function($atts = array())
       <a class="nostyle block" href="<?php the_permalink() ?>" role="button">
         <div class="image-gallery-small" style="--animation-order:<?php echo $animate_order ?>;">
           <div class="image-contain">
-            <?php the_post_thumbnail('post-thumbnail', array('class' => 'batch-load')); ?>
+            <?php the_post_thumbnail('medium', array('class' => 'batch-load')); ?>
           </div>
           <div class="gallery-text">
             <h3><?php echo $title ?></h3>
@@ -144,7 +144,7 @@ function post_grid_function($atts = array())
       <a class="nostyle grid-link no-text" href="<?php the_permalink() ?>" role="button"><?php the_title(); ?></a>
       <div class="scaleable">
         <div class="image-contain shimmer">
-          <?php the_post_thumbnail('post-thumbnail', array('class' => 'batch-load')); ?>
+          <?php the_post_thumbnail('medium', array('class' => 'batch-load')); ?>
         </div>
         <div class="gallery-text">
           <h3><?php the_title(); ?></h3>
@@ -178,10 +178,8 @@ function post_grid_function($atts = array())
     echo "<div class='image-grid-item invisible'></div>";
     echo "<div class='image-grid-item invisible'></div>";
     echo "</div>";
-
-    if (false):
     ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.min.js" integrity="sha512-mMe7BAZPOkGbq+zhRBMNV3Q+5ZDzcUEOJoUYXbHpEcODkDBYbttaW7P108jX66AQgwgsAjvlP4Ayb/XLJZfmsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.min.js" integrity="sha512-mMe7BAZPOkGbq+zhRBMNV3Q+5ZDzcUEOJoUYXbHpEcODkDBYbttaW7P108jX66AQgwgsAjvlP4Ayb/XLJZfmsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
       function rgbToHsl(r, g, b) {
         r /= 255, g /= 255, b /= 255;
@@ -236,12 +234,10 @@ function post_grid_function($atts = array())
 
         }
       });
-    </script>
+    </script> -->
 
 
     <?php
-    endif;
-
     if ($tag_filters) :
     ?>
 
@@ -274,7 +270,7 @@ function post_grid_function($atts = array())
         })
       </script>
 
-<?php
+  <?php
     endif;
 
     echo "</div>";
@@ -286,6 +282,63 @@ function post_grid_function($atts = array())
   endif;
 }
 add_shortcode('post_grid', 'post_grid_function');
+
+
+function connect_card_function($atts)
+{
+  ob_start();
+  $atts = shortcode_atts(array(
+    'title' => '',
+    'hours' => '',
+  ), $atts);
+  $title = $atts['title'];
+  $hours = $atts['hours'];
+  ?>
+  <div class="connect_card">
+    <?php
+    $path = get_template_directory_uri() . "/images/pfp.svg";
+    echo file_get_contents($path);
+    ?>
+    <div class="card-details">
+      <h2>Rohan Menon</h2>
+      <h3>rohan@rohanmenon.com</h3>
+      <p>
+        An engineering student with a focus on embedded devices, sensors, and wireless technologies who thrives in fast-paced, collaborative environments.
+      </p>
+      <ul class="wp-block-social-links has-medium-icon-size is-style-pill-shape" style="padding-left: 0px; margin-bottom: 0 !important; margin-top: 10px !important;">
+        <li class="wp-social-link wp-social-link wp-block-social-link" id="resume-pdf" style="animation-delay: 0.1s;">
+          <a slide-label="PDF Resume" aria-label="Resume PDF" href="https://www.rohanmenon.com/wp-content/uploads/2022/08/Resume-Rohan-Menon-Website.pdf" target="_blank" class="wp-block-social-link-anchor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+<?php
+  return ob_get_clean();
+}
+add_shortcode('connect_card', 'connect_card_function');
+
+function sticky_text_function($atts)
+{
+  ob_start();
+  $atts = shortcode_atts(array(
+    'text' => '',
+  ), $atts);
+  $text = $atts['text'];
+?>
+  <div class="sticky-box">
+    <h2 class="sticky">
+      <?php echo $text; ?>
+    </h2>
+  </div>
+<?php
+  return ob_get_clean();
+}
+add_shortcode('sticky_text', 'sticky_text_function');
 
 // Add Shortcode
 function text_shortcode($atts = array(), $content = null)
@@ -314,7 +367,7 @@ function pageless_doc_embed_function($atts = array())
   $content = str_replace('h4', 'doc-h4', $content);
   // $content = str_replace('<head>', '<head><base href="' . $url . '">', $content);
 
-  return '<div class="pageless-doc">'.$content.'</div>';
+  return '<div class="pageless-doc">' . $content . '</div>';
 }
 add_shortcode('pageless_doc', 'pageless_doc_embed_function');
 
@@ -322,4 +375,26 @@ function site_desc_sc()
 {
   return html_entity_decode(get_bloginfo('description', 'raw'));
 }
-add_shortcode( 'site_desc', 'site_desc_sc' );
+add_shortcode('site_desc', 'site_desc_sc');
+
+function resume_js_animator_function($atts)
+{
+  ob_start();
+  $atts = shortcode_atts(array(
+    'title' => '',
+    'hours' => '',
+  ), $atts);
+  $title = $atts['title'];
+  $hours = $atts['hours'];
+?>
+  <script>
+    const rows = document.querySelectorAll('.resume');
+    console.log(rows);
+    for (let i = 0; i < rows.length; i++) {
+      rows[i].style.setProperty('--animation-order', i);
+    }
+  </script>
+<?php
+  return ob_get_clean();
+}
+add_shortcode('resume_js_animator', 'resume_js_animator_function');
